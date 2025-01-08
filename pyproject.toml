@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "wranglepy"
+name = "wrangle_in_py"
 version = "0.1.0"
 description = "A package for wrangling and tidy data in python."
 authors = ["Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao"]

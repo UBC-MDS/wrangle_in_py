@@ -40,10 +40,10 @@ If you are proposing a feature:
 
 ## Get Started!
 
-Ready to contribute? Here's how to set up `wranglepy` for local development.
+Ready to contribute? Here's how to set up `wrangle_in_py` for local development.
 
-1. Download a copy of `wranglepy` locally.
-2. Install `wranglepy` using `poetry`:
+1. Download a copy of `wrangle_in_py` locally.
+2. Install `wrangle_in_py` using `poetry`:
 
     ```console
     $ poetry install
@@ -69,5 +69,5 @@ Before you submit a pull request, check that it meets these guidelines:
 
 ## Code of Conduct
 
-Please note that the `wranglepy` project is released with a
+Please note that the `wrangle_in_py` project is released with a
 Code of Conduct. By contributing to this project you agree to abide by its terms.

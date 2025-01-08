@@ -6,7 +6,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"wranglepy"
+project = u"wrangle_in_py"
 copyright = u"2025, Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao"
 author = u"Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao"
 
