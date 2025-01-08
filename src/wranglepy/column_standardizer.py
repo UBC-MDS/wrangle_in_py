@@ -4,10 +4,17 @@ def column_standardizer(dataframe):
     Column names will be converted to lowercase and
     non-alphanumerics (including spaces and puncutation) will be replaced with underscores.
 
+    If the standardization results in duplicate column names, a warning will be raised.
+
     Parameters
     ----------
     dataframe : pd.DataFrame
         The input pandas DataFrame whose column names need standardization.
+    
+    Warnings
+    --------
+    UserWarning:
+        If any of the standardized column names are the same.
 
     Returns
     -------
