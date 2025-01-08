@@ -2,7 +2,7 @@ def column_standardizer(dataframe):
     """
     Returns a copy of the inputted dataframe with standardized column names.
     Column names will be converted to lowercase and
-    non-alphanumerics (including spaces and puncutation) will be replaced with underscores.
+    non-alphanumerics (including spaces and punctuation) will be replaced with underscores.
 
     If the standardization results in duplicate column names, a warning will be raised.
 
@@ -35,7 +35,7 @@ def column_standardizer(dataframe):
 def string_standardizer(messy_string):
     """
     Converts the inputted messy_string to lowercase and
-    non-alphanumerics (including spaces and puncutation) will be replaced with underscores.
+    non-alphanumerics (including spaces and punctuation) will be replaced with underscores.
 
     Parameters
     ----------
