@@ -8,7 +8,7 @@ This package consists of the following functions:
 - `resulting_duplicates`: identifies which strings became duplicates after standardization.
 - `extracting_ymd`: returns a copy of the inputted dataframe with three new columns: year, month, and day, splitting from inputted datetime column name.
 - `extracting_hms`: returns a copy of the inputted dataframe with three new columns: hour, minute, and second, from inputted datetime column name.
-- `remove_duplicates`: Remove duplicate rows from a list of dictionaries based on specified keys.
+- `remove_duplicates`: Remove duplicate rows from a DataFrame based on specified columns.
 
 ## Installation
 
