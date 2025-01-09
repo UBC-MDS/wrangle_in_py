@@ -1,3 +1,3 @@
 # read version from installed package
 from importlib.metadata import version
-__version__ = version("wranglepy")
+__version__ = version("wrangle_in_py")
