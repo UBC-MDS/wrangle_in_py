@@ -3,7 +3,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = wranglepy
+SPHINXPROJ    = wrangle_in_py
 SOURCEDIR     = .
 BUILDDIR      = _build
 

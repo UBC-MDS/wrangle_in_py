@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=.
 set BUILDDIR=_build
-set SPHINXPROJ=wranglepy
+set SPHINXPROJ=wrangle_in_py
 
 if "%1" == "" goto help
 
