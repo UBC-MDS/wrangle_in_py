@@ -10,6 +10,10 @@ This package consists of the following functions:
 - `extracting_hms`: returns a copy of the inputted dataframe with three new columns: hour, minute, and second, from inputted datetime column name.
 - `remove_duplicates`: Remove duplicate rows from a DataFrame based on specified columns.
 
+
+This package fills a niche in the Python ecosystem by offering specialized tools for tidying and wrangling data, focusing on standardizing column names and strings, detecting duplicates after standardization, and extracting components from datetime columns. While libraries like [pandas](https://pypi.org/project/pandas/) provide general-purpose methods for similar tasks, such as renaming columns or working with datetime data, these often require multiple steps or custom scripts. By combining these focused functionalities into a single package, it offers a lightweight, user-friendly alternative for efficient data preprocessing.
+
+
 ## Installation
 
 ```bash
