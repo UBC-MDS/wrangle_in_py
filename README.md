@@ -1,6 +1,6 @@
 # wrangle_in_py
 
-A package for wrangling and tidy data in python.
+A package for wrangling and tidy data in python. This package includes functions to assist the user with common data wrangling and tidying tasks in python such as changing column names or removing duplicate rows. 
 
 This package consists of the following functions:
 - `column_standardizer`: returns a copy of the inputted dataframe with standardized column names.
