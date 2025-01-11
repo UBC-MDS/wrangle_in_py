@@ -71,3 +71,6 @@ Before you submit a pull request, check that it meets these guidelines:
 
 Please note that the `wrangle_in_py` project is released with a
 Code of Conduct. By contributing to this project you agree to abide by its terms.
+
+## Attribution
+This contribution guide has been adapted from the [py-pkgs-cookiecutter](https://github.com/py-pkgs/py-pkgs-cookiecutter) template created by Tomas Beuzen and Tiffany Timbers.
