@@ -8,8 +8,8 @@ This package consists of the following functions:
 - `resulting_duplicates`: identifies which strings became duplicates after standardization.
 - `extracting_ymd`: returns a copy of the inputted dataframe with three new columns: year, month, and day, splitting from inputted datetime column name.
 - `extracting_hms`: returns a copy of the inputted dataframe with three new columns: hour, minute, and second, from inputted datetime column name.
-- `remove_duplicates`: Remove duplicate rows from a DataFrame based on specified columns.
-- `column_drop_threshold` : Returns a copy of the dataframe inputted with columns removed if: they did not meet the threshold specified, 
+- `remove_duplicates`: removes duplicate rows from a dataframe based on specified columns.
+- `column_drop_threshold` : returns a copy of the dataframe inputted with columns removed if they did not meet the threshold specified, 
     or if they had lower variance than specified.
 
 This package fills a niche in the Python ecosystem by offering specialized tools for tidying and wrangling data, focusing on standardizing column names and strings, detecting duplicates after standardization, and extracting components from datetime columns. While libraries like [pandas](https://pypi.org/project/pandas/) provide general-purpose methods for similar tasks, such as renaming columns or working with datetime data, these often require multiple steps or custom scripts. By combining these focused functionalities into a single package, it offers a lightweight, user-friendly alternative for efficient data preprocessing.
@@ -36,3 +36,9 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 ## Credits
 
 `wrangle_in_py` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+
+## Contributors
+- Shannon Pflueger
+- Stephanie Ta
+- Wai Ming Wong
+- Yixuan(Clara) Gao
