@@ -2,25 +2,6 @@ import pytest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-
-# Function to test
-def extracting_ymd(df, column):
-    """
-    Returns a copy of the input DataFrame with three new columns: year, month, and day,
-    extracted from the specified datetime column.
-    """
-    if column not in df.columns:
-        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
-    if not pd.api.types.is_datetime64_any_dtype(df[column]):
-        raise TypeError(f"Column '{column}' must be of datetime type.")
-
-    result = df.copy()
-    result[f"{column}_year"] = result[column].dt.year
-    result[f"{column}_month"] = result[column].dt.month
-    result[f"{column}_day"] = result[column].dt.day
-    return result
-
-
 # Test cases
 def test_valid_datetime_column():
     """Test function with a valid datetime column containing multiple rows."""
