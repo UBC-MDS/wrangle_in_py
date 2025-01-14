@@ -55,3 +55,21 @@ def extracting_hms(df, column):
     0 2024-01-07 12:30:45             12                30               45
     1 2023-12-25 08:15:30              8                15               30
     """
+
+    # Check if the column exists
+    if column not in df.columns:
+        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
+    
+    # Check if the column is of datetime type
+    if not pd.api.types.is_datetime64_any_dtype(df[column]):
+        raise TypeError(f"Column '{column}' must be of datetime type.")
+    
+    # Create a copy of the DataFrame to avoid modifying the original
+    result = df.copy()
+
+    # Extract hour, minute, and second into new columns
+    result[f"{column}_hour"] = result[column].dt.hour
+    result[f"{column}_minute"] = result[column].dt.minute
+    result[f"{column}_second"] = result[column].dt.second
+
+    return result
