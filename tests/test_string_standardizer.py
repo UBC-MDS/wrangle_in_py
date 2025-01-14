@@ -33,7 +33,7 @@ def test_edge_case_empty_string():
 # error cases
 def test_error_wrong_type():
     """
-    `string_standardizer` should return a TypeError if the input is
+    `string_standardizer` should raise a TypeError if the input is
     not a string.
     """
     with pytest.raises(TypeError):
