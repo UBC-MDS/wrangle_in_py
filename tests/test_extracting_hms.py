@@ -11,9 +11,9 @@ def test_valid_datetime_column():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     expected = pd.DataFrame({
         'timestamp': pd.to_datetime(['2024-01-07 12:30:45', '2023-12-25 08:15:30']),
-        'timestamp_hour': [12, 8],
-        'timestamp_minute': [30, 15],
-        'timestamp_second': [45, 30]
+        'timestamp_hour': pd.Series([12, 8], dtype="Int64"),
+        'timestamp_minute': pd.Series([30, 15], dtype="Int64"),
+        'timestamp_second': pd.Series([45, 30], dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
@@ -21,12 +21,12 @@ def test_valid_datetime_column():
 
 def test_empty_dataframe():
     """Test function with an empty DataFrame."""
-    df = pd.DataFrame({'timestamp': []})
+    df = pd.DataFrame({'timestamp': pd.Series([], dtype="datetime64[ns]")})
     expected = pd.DataFrame({
-        'timestamp': pd.to_datetime([]),
-        'timestamp_hour': [],
-        'timestamp_minute': [],
-        'timestamp_second': []
+        'timestamp': pd.Series([], dtype="datetime64[ns]"),
+        'timestamp_hour': pd.Series(dtype="Int64"),
+        'timestamp_minute': pd.Series(dtype="Int64"),
+        'timestamp_second': pd.Series(dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
@@ -38,9 +38,9 @@ def test_single_row_dataframe():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     expected = pd.DataFrame({
         'timestamp': pd.to_datetime(['2024-02-15 10:15:45']),
-        'timestamp_hour': [10],
-        'timestamp_minute': [15],
-        'timestamp_second': [45]
+        'timestamp_hour': pd.Series([10], dtype="Int64"),
+        'timestamp_minute': pd.Series([15], dtype="Int64"),
+        'timestamp_second': pd.Series([45], dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
@@ -52,9 +52,9 @@ def test_missing_values():
     df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
     expected = pd.DataFrame({
         'timestamp': pd.to_datetime(['2024-01-07 10:15:30', None, '2023-12-25 08:45:20']),
-        'timestamp_hour': [10, None, 8],
-        'timestamp_minute': [15, None, 45],
-        'timestamp_second': [30, None, 20]
+        'timestamp_hour': pd.Series([10, pd.NA, 8], dtype="Int64"),
+        'timestamp_minute': pd.Series([15, pd.NA, 45], dtype="Int64"),
+        'timestamp_second': pd.Series([30, pd.NA, 20], dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
@@ -63,14 +63,14 @@ def test_missing_values():
 def test_non_datetime_column():
     """Test function with a non-datetime column. Expect a TypeError."""
     df = pd.DataFrame({'timestamp': ['not_a_date', 'still_not_a_date']})
-    with pytest.raises(TypeError, match="must be of datetime type"):
+    with pytest.raises(TypeError, match="Column 'timestamp' must be of datetime type."):
         extracting_hms(df, 'timestamp')
 
 
 def test_missing_column():
     """Test function with a missing column. Expect a KeyError."""
     df = pd.DataFrame({'wrong_column': ['2024-01-01 08:00:00', '2023-12-31 18:45:30']})
-    with pytest.raises(KeyError, match="does not exist in the DataFrame"):
+    with pytest.raises(KeyError, match="Column 'timestamp' does not exist in the DataFrame."):
         extracting_hms(df, 'timestamp')
 
 
@@ -80,9 +80,9 @@ def test_timezone_aware_datetime():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     expected = pd.DataFrame({
         'timestamp': pd.to_datetime(['2024-01-07T12:30:45+00:00', '2023-12-25T08:15:30+00:00']),
-        'timestamp_hour': [12, 8],
-        'timestamp_minute': [30, 15],
-        'timestamp_second': [45, 30]
+        'timestamp_hour': pd.Series([12, 8], dtype="Int64"),
+        'timestamp_minute': pd.Series([30, 15], dtype="Int64"),
+        'timestamp_second': pd.Series([45, 30], dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
@@ -95,12 +95,13 @@ def test_unrelated_columns():
     expected = pd.DataFrame({
         'timestamp': pd.to_datetime(['2024-01-07 12:30:45']),
         'event': ['meeting'],
-        'timestamp_hour': [12],
-        'timestamp_minute': [30],
-        'timestamp_second': [45]
+        'timestamp_hour': pd.Series([12], dtype="Int64"),
+        'timestamp_minute': pd.Series([30], dtype="Int64"),
+        'timestamp_second': pd.Series([45], dtype="Int64")
     })
     result = extracting_hms(df, 'timestamp')
     assert_frame_equal(result, expected)
+
 
 
 def test_special_character_column_name():
@@ -109,9 +110,9 @@ def test_special_character_column_name():
     df['time@stamp'] = pd.to_datetime(df['time@stamp'])
     expected = pd.DataFrame({
         'time@stamp': pd.to_datetime(['2024-01-07 12:30:45']),
-        'time@stamp_hour': [12],
-        'time@stamp_minute': [30],
-        'time@stamp_second': [45]
+        'time@stamp_hour': pd.Series([12], dtype="Int64"),
+        'time@stamp_minute': pd.Series([30], dtype="Int64"),
+        'time@stamp_second': pd.Series([45], dtype="Int64")
     })
     result = extracting_hms(df, 'time@stamp')
     assert_frame_equal(result, expected)
