@@ -56,6 +56,18 @@ def extracting_ymd(df, column):
 
 
 
+    if column not in df.columns:
+        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
+    if not pd.api.types.is_datetime64_any_dtype(df[column]):
+        raise TypeError(f"Column '{column}' must be of datetime type.")
+
+    result = df.copy()
+    result[f"{column}_year"] = result[column].dt.year
+    result[f"{column}_month"] = result[column].dt.month
+    result[f"{column}_day"] = result[column].dt.day
+    return result
+
+
 def extracting_hms(df, column):
     """
     Returns a copy of the input DataFrame with three new columns: hour, minute, and second,
@@ -110,3 +122,4 @@ def extracting_hms(df, column):
     result[f"{column}_second"] = result[column].dt.second.astype("Int64")
 
     return result
+
