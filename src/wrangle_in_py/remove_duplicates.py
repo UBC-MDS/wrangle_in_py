@@ -25,3 +25,16 @@ def remove_duplicates(dataframe, subset_columns=None, keep='first'):
     1  2  6
     3  4  8
     """
+    # Validate input
+    if not isinstance(dataframe, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+
+    if subset_columns is not None:
+        if not all(col in dataframe.columns for col in subset_columns):
+            raise ValueError("Some columns in subset_columns are not present in the DataFrame")
+    
+    if keep not in ['first', 'last', False]: 
+         raise ValueError("Invalid value for 'keep'. Must be 'first', 'last', or False.")
+
+    # Drop duplicates using pandas
+    return dataframe.drop_duplicates(subset=subset_columns, keep=keep)
