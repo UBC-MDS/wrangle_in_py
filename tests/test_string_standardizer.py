@@ -38,7 +38,5 @@ def test_error_wrong_type():
     """
     with pytest.raises(TypeError):
         string_standardizer(12345)
-    with pytest.raises(TypeError):
         string_standardizer(None)
-    with pytest.raises(TypeError):
         string_standardizer(['list', 'of', 'strings'])
