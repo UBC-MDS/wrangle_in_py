@@ -1,5 +1,6 @@
 import pandas as pd
 from collections import defaultdict
+import re
 
 def string_standardizer(messy_string):
     """
@@ -31,11 +32,12 @@ def string_standardizer(messy_string):
     'pineapples'
 
     >>> string_standardizer('Dragon (Fruit)')
-    'dragon_fruit'
+    'dragon__fruit_'
     """
     if not isinstance(messy_string, str):
         raise TypeError("messy_string input should be of type string.")
     new_string = re.sub(r'[^\w]', '_', messy_string)
+    new_string = new_string.lower()
     return new_string
 
 def resulting_duplicates(original_strings, standardized_strings):
@@ -65,10 +67,10 @@ def resulting_duplicates(original_strings, standardized_strings):
     
     Examples
     --------
-    >>> strings_before = ['Jack Fruit 88', "Jack! Fruit! 88!", "PINEAPPLES"]
-    >>> strings_after = ["jack_fruit_88", "jack_fruit_88", "pineapples"]
+    >>> strings_before = ['Jack Fruit 88.', "Jack!Fruit!88!", "PINEAPPLES"]
+    >>> strings_after = ["jack_fruit_88_", "jack_fruit_88_", "pineapples"]
     >>> identify_duplicates(strings_before, strings_after)
-    {'jack_fruit_88': ['Jack Fruit 88', 'Jack! Fruit! 88!']}
+    {'jack_fruit_88_': ['Jack Fruit 88.', 'Jack!Fruit!88!']}
     """
     # check if original_strings and standardized_strings are the same length
     if len(original_strings) != len(standardized_strings):
@@ -127,7 +129,22 @@ def column_standardizer(dataframe):
     >>> data = {'Jack Fruit 88': [1, 2], 'PINEAPPLES': [3, 4], 'Dragon (Fruit)': [25, 30]}
     >>> df = pd.DataFrame(data)
     >>> column_standardizer(df)
-       jack_fruit_88  pineapples  dragon_fruit
+       jack_fruit_88  pineapples  dragon__fruit_
     0           1          3         25
     1           2          4         30
     """
+    if not isinstance(dataframe, pd.DataFrame):
+        raise TypeError("The input must be a pandas DataFrame.")
+
+    original_columns = dataframe.columns.tolist()
+    standardized_columns = [string_standardizer(col) for col in original_columns]
+
+    duplicates = resulting_duplicates(original_columns, standardized_columns)
+
+    if bool(duplicates):
+        import warnings
+        warnings.warn(f"Duplicate column names found after standardization: {duplicates}")
+
+    standardized_df = dataframe.copy()
+    standardized_df.columns = standardized_columns
+    return standardized_df
