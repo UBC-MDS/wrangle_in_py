@@ -58,7 +58,7 @@ def test_edge_case_numeric_column_names():
         '2024': [3, 4]
     })
     standardized_df = column_standardizer(df)
-    assert standardized_df.columns.tolist() == ['2021', '1990']
+    assert standardized_df.columns.tolist() == ['2025', '2024']
     assert isinstance(standardized_df, pd.DataFrame)
     assert standardized_df.shape == df.shape
 

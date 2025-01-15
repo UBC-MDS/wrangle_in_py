@@ -10,7 +10,7 @@ def test_expected_cases():
     """
     assert string_standardizer('Jack Fruit 88') == 'jack_fruit_88'
     assert string_standardizer('PINEAPPLES') == 'pineapples'
-    assert string_standardizer('Dragon (Fruit)') == 'dragon_fruit_'
+    assert string_standardizer('Dragon (Fruit)') == 'dragon__fruit_'
     assert string_standardizer('Mango@Steen!') == 'mango_steen_'
 
 # edge cases

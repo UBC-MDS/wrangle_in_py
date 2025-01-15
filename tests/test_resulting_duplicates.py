@@ -54,9 +54,9 @@ def test_error_different_lengths():
     original_2 = ['MANGO']
     standardized_2 = ['mango', 'dragon fruit']
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Both inputs must be of the same length."):
         resulting_duplicates(original_1, standardized_1)
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="Both inputs must be of the same length."):
         resulting_duplicates(original_2, standardized_2)
 
 
