@@ -37,4 +37,12 @@ def remove_duplicates(dataframe, subset_columns=None, keep='first'):
          raise ValueError("Invalid value for 'keep'. Must be 'first', 'last', or False.")
 
     # Drop duplicates using pandas
-    return dataframe.drop_duplicates(subset=subset_columns, keep=keep)
+    original_row_count = len(dataframe)
+    result = dataframe.drop_duplicates(subset=subset_columns, keep=keep)
+    dropped_rows = original_row_count - len(result)
+
+    print(f"{dropped_rows} rows have been dropped.")
+
+    return result
+
+
