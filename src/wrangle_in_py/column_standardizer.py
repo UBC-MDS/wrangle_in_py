@@ -1,3 +1,6 @@
+import pandas as pd
+from collections import defaultdict
+
 def string_standardizer(messy_string):
     """
     Converts the inputted messy_string to lowercase and
@@ -7,6 +10,11 @@ def string_standardizer(messy_string):
     ----------
     messy_string : str
         The input string to be standardized.
+    
+    Raises
+    ------
+    TypeError :
+        If the input messy_string is not a string.
 
     Returns
     -------
@@ -25,6 +33,10 @@ def string_standardizer(messy_string):
     >>> string_standardizer('Dragon (Fruit)')
     'dragon_fruit'
     """
+    if not isinstance(messy_string, str):
+        raise TypeError("messy_string input should be of type string.")
+    new_string = re.sub(r'[^\w]', '_', messy_string)
+    return new_string
 
 def resulting_duplicates(original_strings, standardized_strings):
     """
@@ -36,6 +48,14 @@ def resulting_duplicates(original_strings, standardized_strings):
         List of strings before standardization.
     standardized_strings : list of str
         List of strings after standardization.
+
+    Raises
+    ------
+    ValueError :
+        If the inputs original_strings and standardized_strings are not the same length.
+    TypeError :
+        If either of the inputs, original_strings or standardized_strings,
+        are not a list of strings.
 
     Returns
     -------
@@ -50,6 +70,28 @@ def resulting_duplicates(original_strings, standardized_strings):
     >>> identify_duplicates(strings_before, strings_after)
     {'jack_fruit_88': ['Jack Fruit 88', 'Jack! Fruit! 88!']}
     """
+    # check if original_strings and standardized_strings are the same length
+    if len(original_strings) != len(standardized_strings):
+        raise ValueError("Both inputs must be of the same length.")
+
+    # check if original_strings is a list of strings
+    if not isinstance(original_strings, list) or not all(isinstance(element, str) for element in original_strings):
+        raise TypeError("list_of_columns must be a list of strings.")
+    
+    # check if standardized_strings is a list of strings
+    if not isinstance(standardized_strings, list) or not all(isinstance(element, str) for element in standardized_strings):
+        raise TypeError("list_of_columns must be a list of strings.")
+    
+    # Map standardized names to original names
+    duplicates = defaultdict(list)
+
+    for orig, std in zip(original_strings, standardized_strings):
+        duplicates[std].append(orig)
+
+    # Filter to keep only those with multiple original columns mapping to the same standardized name
+    duplicates = {key: value for key, value in duplicates.items() if len(value) > 1}
+
+    return duplicates
 
 def column_standardizer(dataframe):
     """
@@ -61,17 +103,22 @@ def column_standardizer(dataframe):
 
     Parameters
     ----------
-    dataframe : pd.DataFrame
+    dataframe : pandas DataFrame
         The input pandas DataFrame whose column names need standardization.
     
     Warnings
     --------
-    UserWarning:
+    UserWarning :
         If any of the standardized column names are the same.
+    
+    Raises
+    ------
+    TypeError:
+        If the input dataframe is not a pandas DataFrame.
 
     Returns
     -------
-    pd.DataFrame
+    pandas DataFrame
         A new DataFrame with standardized column names.
 
     Examples
