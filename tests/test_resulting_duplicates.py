@@ -67,8 +67,13 @@ def test_error_wrong_type():
     """
     with pytest.raises(TypeError):
         resulting_duplicates('not a list', ['jack fruit'])
+    with pytest.raises(TypeError):
         resulting_duplicates(['jack fruit'], 'not a list')
+    with pytest.raises(TypeError):
         resulting_duplicates('not a list', 'not a list')
+    with pytest.raises(TypeError):
         resulting_duplicates(2025, ['mango'])
+    with pytest.raises(TypeError):
         resulting_duplicates(['mango'], 2025)
+    with pytest.raises(TypeError):
         resulting_duplicates(False, True)
