@@ -74,11 +74,11 @@ def resulting_duplicates(original_strings, standardized_strings):
     """
     # check if original_strings is a list of strings
     if not isinstance(original_strings, list) or not all(isinstance(element, str) for element in original_strings):
-        raise TypeError("list_of_columns must be a list of strings.")
+        raise TypeError("original_strings must be a list of strings.")
     
     # check if standardized_strings is a list of strings
     if not isinstance(standardized_strings, list) or not all(isinstance(element, str) for element in standardized_strings):
-        raise TypeError("list_of_columns must be a list of strings.")
+        raise TypeError("standardized_strings must be a list of strings.")
     
     # check if original_strings and standardized_strings are the same length
     if len(original_strings) != len(standardized_strings):
