@@ -39,32 +39,11 @@ def extracting_ymd(df, column):
         result[f"{column}_day"] = pd.Series(dtype="Int64")
         return result
 
-
-    # If DataFrame is empty, add the columns and return
-    if result.empty:
-        result[f"{column}_year"] = pd.Series(dtype="Int64")
-        result[f"{column}_month"] = pd.Series(dtype="Int64")
-        result[f"{column}_day"] = pd.Series(dtype="Int64")
-        return result
-
     # Extract hour, minute, and second into new columns
     result[f"{column}_year"] = result[column].dt.year.astype("Int64")
     result[f"{column}_month"] = result[column].dt.month.astype("Int64")
     result[f"{column}_day"] = result[column].dt.day.astype("Int64")
 
-    return result
-
-
-
-    if column not in df.columns:
-        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
-    if not pd.api.types.is_datetime64_any_dtype(df[column]):
-        raise TypeError(f"Column '{column}' must be of datetime type.")
-
-    result = df.copy()
-    result[f"{column}_year"] = result[column].dt.year
-    result[f"{column}_month"] = result[column].dt.month
-    result[f"{column}_day"] = result[column].dt.day
     return result
 
 
@@ -103,14 +82,6 @@ def extracting_hms(df, column):
 
     # Ensure empty datetime columns are correctly handled
     if result.empty:     
-        result[f"{column}_hour"] = pd.Series(dtype="Int64")
-        result[f"{column}_minute"] = pd.Series(dtype="Int64")
-        result[f"{column}_second"] = pd.Series(dtype="Int64")
-        return result
-
-
-    # If DataFrame is empty, add the columns and return
-    if result.empty:
         result[f"{column}_hour"] = pd.Series(dtype="Int64")
         result[f"{column}_minute"] = pd.Series(dtype="Int64")
         result[f"{column}_second"] = pd.Series(dtype="Int64")
