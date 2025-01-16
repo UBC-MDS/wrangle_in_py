@@ -27,6 +27,14 @@ def test_remove_duplicates_keep_last():
     expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 7, 8]})
     pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
 
+def test_remove_duplicates_keep_last_all_columns():
+    """Test keeping the last occurrence of duplicates across all columns."""
+    data = {'A': [1, 2, 2, 4], 'B': [5, 6, 6, 8]}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, keep='last')
+    expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 6, 8]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+
 def test_remove_duplicates_drop_all():
     """Test dropping all duplicates."""
     data = {'A': [1, 2, 2, 4], 'B': [5, 6, 6, 8]}
@@ -46,11 +54,15 @@ def test_no_duplicates_print(capsys):
     captured = capsys.readouterr()
     assert "0 rows have been dropped." in captured.out
 
-def test_remove_duplicates_empty_dataframe():
+def test_remove_duplicates_empty_dataframe(capsys):
     """Test handling of an empty DataFrame."""
     df = pd.DataFrame(columns=['A', 'B'])
     result = remove_duplicates(df)
     pd.testing.assert_frame_equal(result.reset_index(drop=True), df)
+
+    # Verify print output
+    captured = capsys.readouterr()
+    assert "0 rows have been dropped." in captured.out
 
 def test_all_identical_rows_print(capsys):
     """Test DataFrame where all rows are identical."""
@@ -82,12 +94,21 @@ def test_remove_duplicates_invalid_column():
 def test_remove_duplicates_print_dropped_rows(capsys):
     """Test ."""
     df = pd.DataFrame({'A': [1, 1, 2, 3], 'B': [4, 4, 5, 6]})
-    result = remove_duplicates(df, subset='A', keep='first')
+    result = remove_duplicates(df, subset_columns=['A'], keep='first')
     expected = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
     pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
     
     # Capture print output
     captured = capsys.readouterr()
     assert "1 rows have been dropped." in captured.out
+
+def test_duplicates_in_non_subset_columns():
+    """Test duplicates in columns not included in subset_columns are ignored."""
+    data = {'A': [1, 2, 2, 4], 'B': [5, 6, 7, 6]}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, subset_columns=['A'])
+    expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 6, 6]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+
 
 
