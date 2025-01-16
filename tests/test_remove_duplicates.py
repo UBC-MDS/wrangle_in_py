@@ -91,6 +91,20 @@ def test_remove_duplicates_invalid_column():
     except ValueError as e:
         assert str(e) == "Some columns in subset_columns are not present in the DataFrame"
 
+def test_invalid_keep_parameter():
+    """Test handling of invalid keep parameter."""
+    df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    with pytest.raises(ValueError, match="Invalid value for 'keep'. Must be 'first', 'last', or False."):
+        remove_duplicates(df, keep='invalid_option')
+
+def test_remove_duplicates_no_subset():
+    """Test removing duplicates with subset_columns=None."""
+    data = {'A': [1, 2, 2, 4], 'B': [5, 6, 6, 8]}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, subset_columns=None)
+    expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 6, 8]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+
 def test_remove_duplicates_print_dropped_rows(capsys):
     """Test ."""
     df = pd.DataFrame({'A': [1, 1, 2, 3], 'B': [4, 4, 5, 6]})
@@ -110,5 +124,27 @@ def test_duplicates_in_non_subset_columns():
     expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 6, 6]})
     pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
 
+def test_remove_duplicates_multiple_columns():
+    """Test removing duplicates based on multiple columns."""
+    data = {'A': [1, 2, 2, 4], 'B': [5, 6, 6, 8], 'C': [9, 10, 10, 11]}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, subset_columns=['A', 'B'])
+    expected = pd.DataFrame({'A': [1, 2, 4], 'B': [5, 6, 8], 'C': [9, 10, 11]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
 
+def test_remove_duplicates_mixed_columns():
+    """Test removing duplicates with mixed data types."""
+    data = {'A': ['apple', 'banana', 'apple'], 'B': [1, 2, 1]}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, subset_columns=['A'])
+    expected = pd.DataFrame({'A': ['apple', 'banana'], 'B': [1, 2]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+
+def test_remove_duplicates_large_dataframe():
+    """Test removing duplicates from a large DataFrame."""
+    data = {'A': list(range(1000)) * 2, 'B': list(range(2000))}
+    df = pd.DataFrame(data)
+    result = remove_duplicates(df, subset_columns=['A'])
+    expected = pd.DataFrame({'A': list(range(1000)), 'B': list(range(1000))})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
 
