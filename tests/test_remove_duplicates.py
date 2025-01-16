@@ -35,12 +35,16 @@ def test_remove_duplicates_drop_all():
     expected = pd.DataFrame({'A': [1, 4], 'B': [5, 8]})
     pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
 
-def test_remove_duplicates_no_duplicates():
+def test_no_duplicates_print(capsys):
     """Test DataFrame with no duplicates."""
-    data = {'A': [1, 2, 3], 'B': [4, 5, 6]}
-    df = pd.DataFrame(data)
+    df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
     result = remove_duplicates(df)
-    pd.testing.assert_frame_equal(result.reset_index(drop=True), df)
+    expected = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    # Capture print output
+    captured = capsys.readouterr()
+    assert "0 rows have been dropped." in captured.out
 
 def test_remove_duplicates_empty_dataframe():
     """Test handling of an empty DataFrame."""
@@ -48,13 +52,16 @@ def test_remove_duplicates_empty_dataframe():
     result = remove_duplicates(df)
     pd.testing.assert_frame_equal(result.reset_index(drop=True), df)
 
-def test_remove_duplicates_all_same_rows():
+def test_all_identical_rows_print(capsys):
     """Test DataFrame where all rows are identical."""
-    data = {'A': [1, 1, 1], 'B': [2, 2, 2]}
-    df = pd.DataFrame(data)
+    df = pd.DataFrame({'A': [1, 1, 1], 'B': [2, 2, 2]})
     result = remove_duplicates(df)
     expected = pd.DataFrame({'A': [1], 'B': [2]})
     pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    # Capture print output
+    captured = capsys.readouterr()
+    assert "2 rows have been dropped." in captured.out
 
 def test_remove_duplicates_invalid_input_type():
     """Test handling of invalid input type."""
@@ -71,3 +78,16 @@ def test_remove_duplicates_invalid_column():
         remove_duplicates(df, subset_columns=['C'])
     except ValueError as e:
         assert str(e) == "Some columns in subset_columns are not present in the DataFrame"
+
+def test_remove_duplicates_print_dropped_rows(capsys):
+    """Test ."""
+    df = pd.DataFrame({'A': [1, 1, 2, 3], 'B': [4, 4, 5, 6]})
+    result = remove_duplicates(df, subset='A', keep='first')
+    expected = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+    pd.testing.assert_frame_equal(result.reset_index(drop=True), expected)
+    
+    # Capture print output
+    captured = capsys.readouterr()
+    assert "1 rows have been dropped." in captured.out
+
+
