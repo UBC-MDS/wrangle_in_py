@@ -120,7 +120,7 @@ def test_special_character_column_name():
 
 def test_large_dataframe():
     """Test function with a very large DataFrame."""
-    df = pd.DataFrame({'timestamp': pd.date_range(start='2024-01-01', periods=1000000, freq='S')})
+    df = pd.DataFrame({'timestamp': pd.date_range(start='2024-01-01', periods=1000000, freq='s')})
     result = extracting_hms(df, 'timestamp')
     assert result.shape == (1000000, 4)  # Ensure the new columns are added
     assert result['timestamp_hour'].iloc[0] == 0
