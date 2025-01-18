@@ -5,10 +5,11 @@ from wrangle_in_py import column_drop_threshold
 #test data
 empty_df = pd.DataFrame()
 expected_df = pd.DataFrame({
-    'apple': ['red delicious', 'granny smith', 'gala'],
-    'weight_g': [110, 100, 100],
-    'height_cm': [8, pd.NA, pd.NA]
+    'apple': ['red delicious', 'pink lady' 'granny smith', 'gala'],
+    'weight_g': [110, 100, 100, 105],
+    'height_cm': [8, pd.NA, pd.NA, 12]
 })
+new3_df = expected_df.drop(columns=["weight_g", "height_cm"])
 
 #expected cases
 def expected_missing_drop():
@@ -17,24 +18,25 @@ def expected_missing_drop():
     The variance argument will default to None and no columns should be removed because of high variance
     """
     dropped_thr_df = column_drop_threshold(expected_df, 0.15)
-    assert dropped_thr_df == expected_df.drop(columns=["height_cm"], inplace=True)
+    new_df = expected_df.drop(columns=["height_cm"])
+    assert dropped_thr_df == new_df
 
 def expected_var_drop():
     """
-    
     column_drop_threshold should drop any columns with a coefficient of variance lower than 0.01 .
     Threshold will be set high to allow test only the variance dropping aspect here.
     """
-    dropped_var_df = column_drop_threshold(expected_df, 0.95, 0.01)
-    assert dropped_var_df == expected_df.drop(columns=["weight_g"], inplace=True)
+    dropped_var_df = column_drop_threshold(expected_df, 0.95, 0.3)
+    new2_df = expected_df.drop(columns=["weight_g"])
+    assert dropped_var_df == new2_df
     
 def expected_thr_var_drop():
     """
     column_drop_threshold should drop any columns with more than 15% missing data and
     any columns with a coefficient of variance lower than 0.01
     """
-    dropped_thr_var_df = column_drop_threshold(expected_df, 0.15, 0.01)
-    assert dropped_thr_var_df == expected_df.drop(columns=["weight_g", "height_cm"], inplace=True)
+    dropped_thr_var_df = column_drop_threshold(expected_df, 0.15, 0.3)
+    assert dropped_thr_var_df == new3_df
 
 #edge cases
 def no_drops():
@@ -60,14 +62,14 @@ def low_variance():
     """
     var_copy = expected_df.copy()
     var_copy['height_cm'] = var_copy['height_cm'].fillna(10) # Fill existing NA values with 10
-    assert column_drop_threshold(var_copy, 0.95, 0.9) == expected_df.drop(columns=["weight_g", "height_cm"], inplace=True)
+    assert column_drop_threshold(var_copy, 0.98, 0.9) == new3_df
 
 def high_missing_low_var():
     """
     column_drop_threshold should drop every column, some due to missing values,
     and other columns due to low coefficient of variance
     """
-    assert column_drop_threshold(expected_df, 0.15, 0.9) == expected_df.drop(columns=["weight_g", "height_cm"], inplace=True)
+    assert column_drop_threshold(expected_df, 0.15, 0.9) == new3_df
 
 def empty_test():
     """
