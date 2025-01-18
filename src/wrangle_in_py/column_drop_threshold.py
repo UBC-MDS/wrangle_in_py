@@ -22,6 +22,15 @@ def column_drop_threshold(df, threshold, variance=None):
         Columns with a lower variance than specified will be removed from the dataframe
         A column must have at least 2 numbers for coefficient of variance to be calculated
           because the coefficient of variance cannot be calculated with 1 or 0 numbers. 
+
+    Raises
+    -------
+    TypeError :
+    	If the input for df is not a pandas DataFrame.
+     
+    ValueError :
+    	If the input for threshold is not a float and in the inclusive range 0 and 1.
+     	Or if the input for variance is not a float >=0.
     
     Returns
     ----------
