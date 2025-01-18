@@ -21,6 +21,31 @@ def extracting_ymd(df, column):
     0 2024-01-07 12:30:45             2024                1             7
     1 2023-12-25 08:15:30             2023               12            25
     """
+    # Check if the column exists
+    if column not in df.columns:
+        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
+
+    # Check if the column is of datetime type
+    if not pd.api.types.is_datetime64_any_dtype(df[column]):
+        raise TypeError(f"Column '{column}' must be of datetime type.")
+
+    # Create a copy of the DataFrame to avoid modifying the original
+    result = df.copy()
+
+    # Ensure empty datetime columns are correctly handled
+    if result.empty:     
+        result[f"{column}_year"] = pd.Series(dtype="Int64")
+        result[f"{column}_month"] = pd.Series(dtype="Int64")
+        result[f"{column}_day"] = pd.Series(dtype="Int64")
+        return result
+
+    # Extract hour, minute, and second into new columns
+    result[f"{column}_year"] = result[column].dt.year.astype("Int64")
+    result[f"{column}_month"] = result[column].dt.month.astype("Int64")
+    result[f"{column}_day"] = result[column].dt.day.astype("Int64")
+
+    return result
+
 
 def extracting_hms(df, column):
     """
@@ -43,3 +68,29 @@ def extracting_hms(df, column):
     0 2024-01-07 12:30:45             12                30               45
     1 2023-12-25 08:15:30              8                15               30
     """
+
+    # Check if the column exists
+    if column not in df.columns:
+        raise KeyError(f"Column '{column}' does not exist in the DataFrame.")
+
+    # Check if the column is of datetime type
+    if not pd.api.types.is_datetime64_any_dtype(df[column]):
+        raise TypeError(f"Column '{column}' must be of datetime type.")
+
+    # Create a copy of the DataFrame to avoid modifying the original
+    result = df.copy()
+
+    # Ensure empty datetime columns are correctly handled
+    if result.empty:     
+        result[f"{column}_hour"] = pd.Series(dtype="Int64")
+        result[f"{column}_minute"] = pd.Series(dtype="Int64")
+        result[f"{column}_second"] = pd.Series(dtype="Int64")
+        return result
+
+    # Extract hour, minute, and second into new columns
+    result[f"{column}_hour"] = result[column].dt.hour.astype("Int64")
+    result[f"{column}_minute"] = result[column].dt.minute.astype("Int64")
+    result[f"{column}_second"] = result[column].dt.second.astype("Int64")
+
+    return result
+
