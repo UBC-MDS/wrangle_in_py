@@ -83,6 +83,9 @@ def test_empty_test():
 # invalid input tests
 
 def test_invalid_dataframe_type():
+    """
+    column_drop_threshold should raise a TypeError if the input for df is an invalid data type (not a pandas DataFrame).
+    """
     # Invalid data type (not a DataFrame)
     invalid_inputs = [123, "string", [], None]
     
@@ -91,6 +94,9 @@ def test_invalid_dataframe_type():
             column_drop_threshold(input, 0.5, 0.5)  
 
 def test_invalid_missingness():
+    """
+    column_drop_threshold should raise a ValueError if the input for threshold is invalid (not a float in the inclusive range 0 to <= 1).
+    """
     invalid_inputs = [-0.5, 1.5, "string", [], None]
 
     for input in invalid_inputs:
@@ -98,6 +104,9 @@ def test_invalid_missingness():
             column_drop_threshold(expected_df, input, 0.5)
 
 def test_invalid_cv():
+    """
+    column_drop_threshold should raise a ValueError if the input for variance is invalid (not a float >= 0)
+    """
     invalid_inputs = [-1, "string", []]
 
     for input in invalid_inputs:
