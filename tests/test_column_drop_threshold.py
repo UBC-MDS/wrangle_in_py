@@ -18,7 +18,7 @@ def test_expected_missing_drop():
     Column_drop_threshold should drop any columns with more than 15% missing data. 
     The variance argument will default to None and no columns should be removed because of high variance
     """
-    dropped_thr_df = column_drop_threshold(expected_df, 0.15)
+    dropped_thr_df = column_drop_threshold(expected_df, 0.15, 0.01)
     new_df = expected_df.drop(columns=["height_cm"])
     assert dropped_thr_df.shape == new_df.shape, f"Expected shape {new_df.shape}, but got {dropped_thr_df.shape}"
 
