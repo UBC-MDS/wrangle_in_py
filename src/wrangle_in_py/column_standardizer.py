@@ -48,6 +48,7 @@ def resulting_duplicates(original_strings, standardized_strings):
     ----------
     original_strings : list of str
         List of strings before standardization.
+        
     standardized_strings : list of str
         List of strings after standardization.
 
@@ -55,13 +56,14 @@ def resulting_duplicates(original_strings, standardized_strings):
     ------
     ValueError :
         If the inputs original_strings and standardized_strings are not the same length.
+        
     TypeError :
         If either of the inputs, original_strings or standardized_strings,
         are not a list of strings.
 
     Returns
     -------
-    dict
+    dict :
         A dictionary where the keys are the standardized strings with duplicate(s),
         and the values are lists of the original strings that map to them.
     
@@ -120,7 +122,7 @@ def column_standardizer(dataframe):
 
     Returns
     -------
-    pandas DataFrame
+    pandas.DataFrame :
         A new DataFrame with standardized column names.
 
     Examples
