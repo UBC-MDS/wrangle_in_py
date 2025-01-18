@@ -39,18 +39,17 @@ def column_drop_threshold(df, threshold, variance=None):
     1   2     4
     2   NaN   5
     """
-    def column_drop_threshold(df, threshold, variance):
-        # Check that the first argument is a DataFrame
-        if not isinstance(df, pd.DataFrame):
-            raise TypeError("The first argument must be a pandas DataFrame.")
+    # Check that the df is a pandas dataframe
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("The first argument must be a pandas DataFrame.")
         
-        # Check that the missingness threshold is a number between 0 and 1
-        if not (isinstance(threshold, (int, float)) and 0 <= threshold <= 1):
-            raise ValueError("The missingness threshold must be a number between 0 and 1.")
+    # Check that the missingness threshold is a number between 0 and 1
+    if not (isinstance(threshold, (int, float)) and 0 <= threshold <= 1):
+        raise ValueError("The missingness threshold must be a number between 0 and 1.")
     
-        # Check that the coefficient of variance is a positive float
-        if not (isinstance(variance, float) and variance > 0):
-            raise ValueError("The coefficient of variance must be a positive float.")
+    # Check that the coefficient of variance is a positive float
+    if variance is not None and not (isinstance(variance, (int, float)) and variance >= 0):
+        raise ValueError("The coefficient of variance must be a positive float.")
 
     columns_to_drop = []	
 
