@@ -10,6 +10,7 @@ expected_df = pd.DataFrame({
     'height_cm': [8, pd.NA, pd.NA, 12]
 })
 new3_df = expected_df.drop(columns=["weight_g", "height_cm"])
+pd.set_option('future.no_silent_downcasting', True)
 
 #expected cases
 def test_expected_missing_drop():
@@ -45,7 +46,7 @@ def test_no_drops():
     the variance is below the specified max.
     """
     expected_copy = expected_df.copy()
-    expected_copy['height_cm'] = expected_copy['height_cm'].fillna(10) # Fill existing NA values with a number
+    expected_copy['height_cm'] = expected_copy['height_cm'].fillna(10).infer_objects(copy=False) # Fill existing NA values with a number
     assert column_drop_threshold(expected_copy, 0.4).shape == expected_copy.shape, f"Expected shape {expected_copy.shape}, but got {column_drop_threshold(expected_copy, 0.4).shape}"
 
 def test_high_missingness():
@@ -53,6 +54,7 @@ def test_high_missingness():
     column_drop_threshold should drop every column due to missing values
     """ 
     missing_copy = expected_df.copy()
+    missing_copy = missing_copy.astype('object')  # Convert to nullable object type
     missing_copy[:] = pd.NA # Replace all values with NA
     no_columns = expected_df.drop(columns=["apple", "weight_g", "height_cm"])
     assert column_drop_threshold(missing_copy, 0.5).shape == no_columns.shape, f"Expected shape {no_columns.shape}, but got {column_drop_threshold(missing_copy, 0.5).shape}"
@@ -62,7 +64,7 @@ def test_low_variance():
     column_drop_threshold should drop every column due to a too low coefficient of variance
     """
     var_copy = expected_df.copy()
-    var_copy['height_cm'] = var_copy['height_cm'].fillna(10) # Fill existing NA values with 10
+    var_copy['height_cm'] = var_copy['height_cm'].fillna(10).infer_objects(copy=False) # Fill existing NA values with 10
     assert column_drop_threshold(var_copy, 0.98, 0.9).shape == new3_df.shape, f"Expected shape {new3_df.shape}, but got {column_drop_threshold(var_copy, 0.98, 0.9).shape}"
 
 def test_high_missing_low_var():
