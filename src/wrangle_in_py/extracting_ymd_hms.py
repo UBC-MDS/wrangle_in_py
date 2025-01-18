@@ -9,6 +9,7 @@ def extracting_ymd(df, column):
     ----------
     df : pandas.DataFrame
         The DataFrame containing the datetime column.
+        
     column : str
         The name of the datetime column to extract from.
 
@@ -70,6 +71,7 @@ def extracting_hms(df, column):
     -----------
     df : pd.DataFrame
         The DataFrame containing the datetime column.
+        
     column : str
         The name of the datetime column to extract from.
         
