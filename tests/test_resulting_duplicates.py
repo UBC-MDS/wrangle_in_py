@@ -1,5 +1,5 @@
 import pytest
-from wrangle_in_py.column_standardizer import resulting_duplicates
+from wrangle_in_py.column_name_standardizer import resulting_duplicates
 
 # expected cases
 def test_no_duplicates():

@@ -1,5 +1,5 @@
 import pytest
-from wrangle_in_py.column_standardizer import string_standardizer
+from wrangle_in_py.column_name_standardizer import string_standardizer
 
 # expected cases
 def test_expected_cases():
