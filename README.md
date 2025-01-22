@@ -3,9 +3,9 @@
 A package for wrangling and tidy data in python. This package includes functions to assist the user with common data wrangling and tidying tasks in python such as changing column names or removing duplicate rows. 
 
 This package consists of the following functions:
-- `column_standardizer`: returns a copy of the inputted dataframe with standardized column names.
-- `string_standardizer`: returns a string that is converted to lowercase and its non-alphanumerics (including spaces and punctuation) are replaced with underscores.
-- `resulting_duplicates`: identifies which strings became duplicates after standardization.
+- `column_name_standardizer`: returns a copy of the inputted dataframe with standardized column names.
+- `string_standardizer`: returns a string that is converted to lowercase and its non-alphanumerics (including spaces and punctuation) are replaced with underscores. A helper function for `column_name_standardizer`.
+- `resulting_duplicates`: identifies which strings became duplicates after standardization. A helper function for `column_name_standardizer`.
 - `extracting_ymd`: returns a copy of the inputted dataframe with three new columns: year, month, and day, splitting from inputted datetime column name.
 - `extracting_hms`: returns a copy of the inputted dataframe with three new columns: hour, minute, and second, from inputted datetime column name.
 - `remove_duplicates`: Remove duplicate rows from a DataFrame based on specified columns.
