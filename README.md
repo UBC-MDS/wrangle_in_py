@@ -1,4 +1,5 @@
 # wrangle_in_py
+[![Documentation Status](https://readthedocs.org/projects/wrangle_in_py/badge/?version=latest)](https://wrangle_in_py.readthedocs.io/en/latest/?badge=latest)
 
 A package for wrangling and tidy data in python. This package includes functions to assist the user with common data wrangling and tidying tasks in python such as changing column names or removing duplicate rows. 
 
