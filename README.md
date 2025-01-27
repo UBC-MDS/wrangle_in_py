@@ -22,9 +22,9 @@ This package fills a niche in the Python ecosystem by offering specialized tools
 $ pip install wrangle_in_py
 ```
 
-## Usage
+## Documentation
 
-- TODO
+Our online documentation can be found [here](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest).
 
 ## Contributing
 
