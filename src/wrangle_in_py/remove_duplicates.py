@@ -1,12 +1,12 @@
 import pandas as pd
 
-def remove_duplicates(dataframe, subset_columns=None, keep='first'):
+def remove_duplicates(df, subset_columns=None, keep='first'):
     """
     Remove duplicate rows from a DataFrame based on specified columns.
 
     Parameters
     ----------
-    dataframe : pd.DataFrame
+    df : pd.DataFrame
         The DataFrame to process.
         
     subset_columns : list or None
@@ -41,19 +41,19 @@ def remove_duplicates(dataframe, subset_columns=None, keep='first'):
     3  4  8
     """
     # Validate input
-    if not isinstance(dataframe, pd.DataFrame):
+    if not isinstance(df, pd.DataFrame):
         raise ValueError("Input must be a pandas DataFrame")
 
     if subset_columns is not None:
-        if not all(col in dataframe.columns for col in subset_columns):
+        if not all(col in df.columns for col in subset_columns):
             raise ValueError("Some columns in subset_columns are not present in the DataFrame")
     
     if keep not in ['first', 'last', False]: 
          raise ValueError("Invalid value for 'keep'. Must be 'first', 'last', or False.")
 
     # Drop duplicates using pandas
-    original_row_count = len(dataframe)
-    result = dataframe.drop_duplicates(subset=subset_columns, keep=keep)
+    original_row_count = len(df)
+    result = df.drop_duplicates(subset=subset_columns, keep=keep)
     dropped_rows = original_row_count - len(result)
 
     print(f"{dropped_rows} rows have been dropped.")
