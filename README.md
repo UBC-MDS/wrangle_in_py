@@ -1,5 +1,5 @@
 # wrangle_in_py
-[![Documentation Status](https://readthedocs.org/projects/wrangle-in-py/badge/?version=latest)](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/wrangle-in-py/badge/?version=latest)](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest) [![codecov](https://codecov.io/gh/UBC-MDS/wrangle_in_py/graph/badge.svg?token=2TTQ23iNKM)](https://codecov.io/gh/UBC-MDS/wrangle_in_py)
 
 A package for wrangling and tidy data in python. This package includes functions to assist the user with common data wrangling and tidying tasks in python such as changing column names or removing duplicate rows. 
 
@@ -22,17 +22,17 @@ This package fills a niche in the Python ecosystem by offering specialized tools
 $ pip install wrangle_in_py
 ```
 
-## Usage
+## Documentation
 
-- TODO
+Our online documentation can be found [here](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest).
 
 ## Contributing
 
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
+Interested in contributing? Check out the [contributing guidelines](CONTRIBUTING.md). Please note that this project is released with a [Code of Conduct](CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
 ## License
 
-`wrangle_in_py` was created by Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao. It is licensed under the terms of the MIT license.
+`wrangle_in_py` was created by Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao. It is licensed under the terms of the MIT license and Creative Commons Attribution 4.0 International License. [LICENSE](LICENSE)
 
 ## Credits
 

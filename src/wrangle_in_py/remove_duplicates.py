@@ -7,7 +7,7 @@ def remove_duplicates(df, subset_columns=None, keep='first'):
     Parameters
     ----------
     df : pd.DataFrame
-        The DataFrame to process.
+        The dataframe to process.
         
     subset_columns : list or None
         List of column names to consider for identifying duplicates.
