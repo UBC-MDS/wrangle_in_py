@@ -22,7 +22,7 @@ def remove_duplicates(df, subset_columns=None, keep='first'):
     Raises
     ------
     ValueError :
-        If the input for dataframe is not a pandas DataFrame.
+        If the input for df is not a pandas DataFrame.
         If any column in subset_columns is not a column in the input dataframe.
         If the input for keep is not 'first', 'last', or False.
 

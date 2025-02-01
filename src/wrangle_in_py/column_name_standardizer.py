@@ -97,7 +97,7 @@ def resulting_duplicates(original_strings, standardized_strings):
 
     return duplicates
 
-def column_name_standardizer(dataframe):
+def column_name_standardizer(df):
     """
     Returns a copy of the inputted dataframe with standardized column names.
     Column names will be converted to lowercase and
@@ -107,7 +107,7 @@ def column_name_standardizer(dataframe):
 
     Parameters
     ----------
-    dataframe : pandas DataFrame
+    df : pandas DataFrame
         The input pandas DataFrame whose column names need standardization.
     
     Warnings
@@ -135,10 +135,10 @@ def column_name_standardizer(dataframe):
     0           1          3         25
     1           2          4         30
     """
-    if not isinstance(dataframe, pd.DataFrame):
+    if not isinstance(df, pd.DataFrame):
         raise TypeError("The input must be a pandas DataFrame.")
 
-    original_columns = dataframe.columns.tolist()
+    original_columns = df.columns.tolist()
     standardized_columns = [string_standardizer(col) for col in original_columns]
 
     duplicates = resulting_duplicates(original_columns, standardized_columns)
@@ -147,6 +147,6 @@ def column_name_standardizer(dataframe):
         import warnings
         warnings.warn(f"Duplicate column names found after standardization: {duplicates}")
 
-    standardized_df = dataframe.copy()
+    standardized_df = df.copy()
     standardized_df.columns = standardized_columns
     return standardized_df
