@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.4 (2025-02-01)
+
+### Bug Fixes
+
+- Feedback addressed by updating order of function description in README (Yixuan)
+  ([`9b6c28b`](https://github.com/UBC-MDS/wrangle_in_py/commit/9b6c28b2c2a18206b2aba8183a96340b9cdf2ec0))
+
+
 ## v0.0.3 (2025-02-01)
 
 ### Bug Fixes
