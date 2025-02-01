@@ -32,7 +32,7 @@ Interested in contributing? Check out the [contributing guidelines](CONTRIBUTING
 
 ## License
 
-`wrangle_in_py` was created by Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao. It is licensed under the terms of the MIT license.
+`wrangle_in_py` was created by Shannon Pflueger, Stephanie Ta, Wai Ming Wong, Yixuan(Clara) Gao. It is licensed under the terms of the MIT license and Creative Commons Attribution 4.0 International License. [LICENSE](LICENSE)
 
 ## Credits
 
