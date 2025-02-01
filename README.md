@@ -29,6 +29,13 @@ This package fills a niche in the Python ecosystem by offering specialized tools
 $ pip install wrangle_in_py
 ```
 
+## Package Dependencies
+Our package has the following dependencies:
+- python >= 3.11
+- pandas >= 2.2.3
+- scipy >= 1.15.1
+Please note these packages will be installed when pip installing this package.
+
 ## Documentation
 
 Our online documentation can be found [here](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest).
