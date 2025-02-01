@@ -31,7 +31,6 @@ $ pip install wrangle_in_py
 
 ## Package Dependencies
 Our package has the following dependencies:
-- python >= 3.11
 - pandas >= 2.2.3
 - scipy >= 1.15.1
 Please note these packages will be installed when pip installing this package.
