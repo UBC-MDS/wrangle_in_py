@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v0.0.2 (2025-02-01)
+
+### Bug Fixes
+
+- Feedback addressed by updating test_remove_suplicates docstring (Yixuan)
+  ([`7bca2b8`](https://github.com/UBC-MDS/wrangle_in_py/commit/7bca2b8f402ab917c2efe3ebb19706f2978910ee))
+
+
 ## v0.0.1 (2025-01-30)
 
 ### Bug Fixes
