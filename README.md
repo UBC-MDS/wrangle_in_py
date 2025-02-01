@@ -29,6 +29,12 @@ This package also includes the following helper functions:
 $ pip install wrangle_in_py
 ```
 
+## Package Dependencies
+Our package has the following dependencies:
+- pandas >= 2.2.3
+- scipy >= 1.15.1
+Please note these packages will be installed when pip installing this package.
+
 ## Documentation
 
 Our online documentation can be found [here](https://wrangle-in-py.readthedocs.io/en/latest/?badge=latest).
