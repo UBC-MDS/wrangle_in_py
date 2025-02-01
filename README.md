@@ -3,6 +3,8 @@
 
 A package for wrangling and tidy data in python. This package includes functions to assist the user with common data wrangling and tidying tasks in python such as changing column names or removing duplicate rows. 
 
+This package fills a niche in the Python ecosystem by offering specialized tools for tidying and wrangling data, focusing on standardizing column names and strings, detecting duplicates after standardization, and extracting components from datetime columns. While libraries like [pandas](https://pypi.org/project/pandas/) provide general-purpose methods for similar tasks, such as renaming columns or working with datetime data, these often require multiple steps or custom scripts. By combining these focused functionalities into a single package, it offers a lightweight, user-friendly alternative for efficient data preprocessing.
+
 ## User-Facing Functions
 
 This package consists of the following user-facing functions:
@@ -19,8 +21,6 @@ This package also includes the following helper functions:
 
 - **`string_standardizer`**: Returns a string that is converted to lowercase and its non-alphanumerics (including spaces and punctuation) are replaced with underscores. A helper function for `column_name_standardizer`.
 - **`resulting_duplicates`**: Identifies which strings became duplicates after standardization. A helper function for `column_name_standardizer`.
-
-This package fills a niche in the Python ecosystem by offering specialized tools for tidying and wrangling data, focusing on standardizing column names and strings, detecting duplicates after standardization, and extracting components from datetime columns. While libraries like [pandas](https://pypi.org/project/pandas/) provide general-purpose methods for similar tasks, such as renaming columns or working with datetime data, these often require multiple steps or custom scripts. By combining these focused functionalities into a single package, it offers a lightweight, user-friendly alternative for efficient data preprocessing.
 
 
 ## Installation
